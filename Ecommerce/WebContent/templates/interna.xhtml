@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+<h:head>
+
+	<meta charset="utf-8" />
+	<title>Ecommerce Faculdade</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<!-- Le styles -->
+	<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<link id="switch_style"
+		href="../resources/bootstrap/css/united/bootstrap.css"
+		rel="stylesheet" />
+	<link href="../resources/css/main.css" rel="stylesheet" />
+	<link href="../resources/css/jquery.rating.css" rel="stylesheet" />
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</h:head>
+<body>
+	<div class="container">
+		<div class="row">
+			<!-- start header -->
+			<div class="span4 logo">
+				<a href="index.jsf">
+					<h1>Ecommerce Newton</h1>
+				</a>
+			</div>
+			<div class="span8">
+				<br /> <br /> <br />
+				<div class="row">
+					<div class="links pull-right">
+						<a href="index.jsf">Home</a> |
+						<!-- 						<a href="registro.jsf">Minha Conta</a> | -->
+						<a href="registro.jsf">Cadastro</a> |
+						<!-- 						<a href="carrinho.jsf">Carrinho de Compras</a> | -->
+						<!-- 						<a href="two-column.html">Sobre</a> | -->
+						<!-- 						<a href="contact.html">Contato</a> | -->
+						<!-- 						<a href="#" onclick="document.location='#{request.contextPath}/j_spring_security_logout'">Sair</a> -->
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- end header -->
+
+		<div class="row">
+			<!-- start nav -->
+			<div class="span12">
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="container" style="width: auto;">
+							<a class="btn btn-navbar" data-toggle="collapse"
+								data-target=".nav-collapse"> <span class="icon-bar"></span>
+								<span class="icon-bar"></span> <span class="icon-bar"></span>
+							</a>
+							<div class="nav-collapse">
+								<ul class="nav">
+									<li>
+										<!-- 							  <a href="category.html">Computadores</a>		 --> 
+										<h:link value="Computador" outcome="listaProduto">
+											<f:param name="categoria" value="1" />
+										</h:link>
+									</li>
+
+									<li>
+										<h:link value="Notebook" outcome="listaProduto">
+											<f:param name="categoria" value="2" />
+										</h:link>
+									</li>
+									<li>
+										<h:link value="Acessório" outcome="listaProduto">
+											<f:param name="categoria" value="3" />
+										</h:link>
+									</li>
+									<li>
+										<h:link value="Tablet" outcome="listaProduto">
+											<f:param name="categoria" value="4" />
+										</h:link>
+									</li>
+									<li>
+										<h:link value="Celulares" outcome="listaProduto" >
+											<f:param name="categoria" value="5" />
+										</h:link>
+									</li>
+								</ul>
+								<ul class="nav pull-right">
+									<li class="divider-vertical"></li>
+									<h:form class="navbar-search" action="">
+										<h:inputText value="#{produtoBean.filtroProduto}"
+											styleClass="search-query span2" />
+										<h:commandButton value="Ir"
+											action="#{produtoBean.pesquisaFiltrada}"
+											styleClass="btn btn-primary btn-small search_btn" />
+									</h:form>
+
+								</ul>
+							</div>
+							<!-- /.nav-collapse -->
+						</div>
+					</div>
+					<!-- /navbar-inner -->
+				</div>
+				<!-- /navbar -->
+			</div>
+		</div>
+		<!-- end nav -->
+	</div>
+
+	<div class="container">
+		<div id="corpo">
+			<ui:insert name="corpo" />
+		</div>
+	</div>
+
+	<div class="container">
+		<footer>
+		<hr />
+		<div class="row well no_margin_left">
+
+			<div class="span3">
+				<h4>Informações</h4>
+				<ul>
+					<li><a href="two-column.html">Sobre Nós</a></li>
+					<li><a href="typography.html">Informação de Entrega</a></li>
+					<li><a href="typography.html">Politica de Privacidade</a></li>
+					<li><a href="typography.html">Termos e Condições</a></li>
+					<li><a href="typography.html">Contato</a></li>
+				</ul>
+			</div>
+		</div>
+		</footer>
+
+	</div>
+
+</body>
+</html>

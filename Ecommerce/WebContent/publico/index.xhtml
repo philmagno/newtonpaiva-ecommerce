@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+
+<meta charset="utf-8" />
+<title>Ecommerce Newton</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<!-- Le styles -->
+<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link id="switch_style"
+	href="../resources/bootstrap/css/united/bootstrap.css" rel="stylesheet" />
+<link href="../resources/css/main.css" rel="stylesheet" />
+<link href="../resources/css/jquery.rating.css" rel="stylesheet" />
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<ui:composition template="/templates/interna.xhtml">
+	<ui:define name="corpo">
+		<body>
+			<div class="span9">
+				<div id="myCarousel" class="carousel slide">
+					<div class="carousel-inner">
+						<div class="item active">
+							<img src="../resources/css/images/carousel_1.jpg" alt="" />
+							<div class="carousel-caption">
+								<h4>PS VITA</h4>
+								<p>Playstation Vita é um console portátil da Sony. Sucessor
+									do PSP, o PS Vita foi lançado para mudar a forma como os gamers
+									veem os consoles móveis.</p>
+							</div>
+
+						</div>
+						<div class="item">
+							<img src="../resources/css/images/ultrabook.jpg" alt="" />
+							<div class="carousel-caption">
+								<h4>Ultrabook Samsung</h4>
+								<p>Para você que procura mobilidade, tecnologia e o melhor
+									desempenho, a Samsung traz o Ultrabook NP530U3C-AD4 com a
+									performance que você necessita. Leve e fino, para estar sempre
+									a mão.</p>
+							</div>
+						</div>
+
+						<div class="item">
+							<img src="../resources/css/images/s4.jpg" alt="" />
+							<div class="carousel-caption">
+								<h4>Samsung S4</h4>
+								<p>O Samsung Galaxy S4 proporciona a você inúmeras
+									funcionalidades inovadoras que ampliam as conexões com a
+									família e amigos, permitindo compartilhar e experimentar muitos
+									dos prazeres da vida onde quer que você esteja.</p>
+							</div>
+						</div>
+					</div>
+
+					<a class="left carousel-control" href="#myCarousel"
+						data-slide="prev">&lsaquo;</a> <a class="right carousel-control"
+						href="#myCarousel" data-slide="next">&rsaquo;</a>
+				</div>
+			</div>
+			<div class="span2" style="height: 315px;">
+				<div class="roe">
+					<h4>Cadastro</h4>
+					<br />
+					<p>Realize o cadastro no site para manter-se atualizado com as
+						últimas ofertas e novos produtos.</p>
+					<form class="form-search" action="registro.jsf">
+						<br />
+						<button type="submit" class="btn pull-right">Cadastro</button>
+					</form>
+				</div>
+				<br /> <br />
+			</div>
+			<h:form>
+				<div id="lista_produtos"
+					style="width: 800px !important; margin-left: 20px !important;">
+					<ul class="thumbnails">
+						<ui:repeat var="produto" value="#{produtoBean.listaProdutos}">
+							<li class="span2">
+								<div class="thumbnail" style="width:140px !important;height:188px !important;">
+<!-- 									<a href="product.html"><img alt="" -->
+<!-- 										src="css/images/ps-vita-150cx123.jpg" /></a> -->
+									<h:graphicImage library="css" name="images/macbook-pro.jpg" />
+									<div class="caption">
+										<h5>#{produto.nome}</h5>
+										<!-- 								</a>  -->
+										Preço: #{produto.preco}<br /> <br />
+									</div>
+								</div>
+							</li>
+						</ui:repeat>
+					</ul>
+				</div>
+				<h:panelGroup>
+					<div class="pagination">
+						<ul>
+							<h:panelGroup
+								rendered="#{produtoBean.index >= produtoBean.limit}">
+								<li><h:link outcome="listaProduto" value="Voltar">
+										<f:param name="startIndex"
+											value="#{produtoBean.index - produtoBean.limit}" />
+									</h:link></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{not empty produtoBean.listaProdutos}">
+								<li><h:link outcome="listaProduto" value="Mais Produtos">
+										<f:param name="startIndex"
+											value="#{produtoBean.index + produtoBean.limit}" />
+									</h:link></li>
+							</h:panelGroup>
+						</ul>
+					</div>
+				</h:panelGroup>
+			</h:form>
+
+			<!-- Placed at the end of the document so the pages load faster -->
+			<script src="../resources/js/jquery.min.js"></script>
+			<script src="../resources/bootstrap/js/bootstrap.js"></script>
+			<script src="../resources/js/jquery.rating.pack.js"></script>
+		</body>
+	</ui:define>
+</ui:composition>
+</html>

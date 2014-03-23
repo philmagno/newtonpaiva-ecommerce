@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition template="/templates/interna.xhtml">
+		<f:metadata>
+			<f:viewParam name="startIndex" value="#{produtoBean.index}" />
+			<f:event listener="#{produtoBean.buscarPaginada}" type="preRenderView" />
+		</f:metadata>
+
+		<ui:define name="corpo">
+			<h:form>
+				<ul class="thumbnails">
+					<ui:repeat var="produto" value="#{produtoBean.listaProdutos}">
+						<li class="span2">
+							<div class="thumbnail" style="width:140px !important;height:188px !important;">
+<!-- 								<a href="product.html"><img alt="" -->
+<!-- 									src="css/images/ps-vita-150cx123.jpg" /></a> -->
+								<h:graphicImage library="css" name="images/macbook-pro.jpg" />
+								<div class="caption">
+									<!-- 								<a href="product.html"> -->
+									<h5>#{produto.nome}</h5>
+									<!-- 								</a>  -->
+									Preço: #{produto.preco}<br /> <br />
+								</div>
+							</div>
+						</li>
+					</ui:repeat>
+				</ul>
+				<h:panelGroup>
+					<div class="pagination">
+						<ul>
+							<h:panelGroup rendered="#{produtoBean.index >= produtoBean.limit}">
+								<li><h:link outcome="listaProduto" value="Voltar">
+										<f:param name="startIndex"
+											value="#{produtoBean.index - produtoBean.limit}" />
+									</h:link></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{not empty produtoBean.listaProdutos}">
+								<li><h:link outcome="listaProduto" value="Avançar">
+										<f:param name="startIndex"
+											value="#{produtoBean.index + produtoBean.limit}" />
+									</h:link></li>
+							</h:panelGroup>
+						</ul>
+					</div>
+				</h:panelGroup>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
