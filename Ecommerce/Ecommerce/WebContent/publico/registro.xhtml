@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<head>
+
+    <meta charset="utf-8" />
+    <title>Ecommerce Newton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Le styles -->
+    <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link id="switch_style" href="../resources/bootstrap/css/united/bootstrap.css" rel="stylesheet" />
+    <link href="../resources/css/main.css" rel="stylesheet" />
+    <link href="../resources/css/jquery.rating.css" rel="stylesheet" />
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+
+  <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+  
+<ui:composition template="/templates/interna.xhtml">
+
+<ui:define name="corpo">
+
+<body>
+
+	<div class="span12">
+		<ul class="breadcrumb">
+			<li><a href="index.jsf">Home</a> <span class="divider">/</span></li>
+			<li><a href="restrito/minha_conta.jsf">Minha Conta</a> <span class="divider">/</span></li>
+			<li class="active"><a href="registro.jsf">Registro</a></li>
+		</ul>
+		</div>
+
+			<div class="span12">
+			<h:messages style="color: red;" />
+			
+				<h1>Crie Sua Conta</h1>
+				
+				<br />				
+				<h:form class="form-horizontal" prependId="false">
+					<fieldset>
+					<div class="span6 no_margin_left">
+						<legend>Detalhes Pessoais</legend>
+					  <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Nome" for="nome" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="nome" label="Nome" value="#{usuarioBean.usuario.nome}" required="true" requiredMessage="O nome do usuário é obrigatório" />
+						</div>
+					  </div>
+					  <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Email" for="email" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="email" label="Email" value="#{usuarioBean.usuario.email}" required="true" requiredMessage="O email do usuário é obrigatório" />
+						</div>
+					  </div>
+					 <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Telefone" for="telefone" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputMask id="telefone" value="#{usuarioBean.usuario.telefone}" styleClass="span4" required="true" mask="(99) 9999-9999" requiredMessage="O Telefone é obrigatório" />
+						</div>
+					  </div>
+						<div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Senha" for="senha" />
+						<div class="controls docs-input-sizes">
+   						  <p:password styleClass="span4" id="senha" label="Senha" value="#{usuarioBean.usuario.senha}" required="true" requiredMessage="A senha é obrigatória" />
+						</div>
+					  </div>
+						<div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Confirmar Senha" for="confirmasenha" />
+						<div class="controls docs-input-sizes">
+   						  <p:password styleClass="span4" id="confirmasenha" label="Confirmar Senha" value="#{usuarioBean.confirma_senha}" required="true" requiredMessage="A confirmação de senha é obrigatória" />
+						</div>
+					  </div>
+					  
+					  <div class="span6">
+					<legend>Localização</legend>
+					<div class="control-group">
+						<p:outputLabel styleClass="control-label" value="CEP" for="cep" />
+						<div class="controls docs-input-sizes">
+    						 <p:inputMask id="cep" value="#{usuarioBean.usuario.cep}" styleClass="span4" required="true" mask="99999-999" requiredMessage="O Cep é obrigatório" onblur="consultacep(this.value)"/>
+						</div>
+					  </div>
+					  <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Endereço" for="endereco" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="endereco" label="Endereço" value="#{usuarioBean.usuario.endereco}" required="true" requiredMessage="O endereço é obrigatório" />
+						</div>
+					  </div>
+					   <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Número" for="numero" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="numero" label="Número" value="#{usuarioBean.numero}" required="true" requiredMessage="O número é obrigatório" />
+						</div>
+					  </div>
+					   <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Complemento" for="complemento" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="complemento" label="Complemento" value="#{usuarioBean.complemento}" />
+						</div>
+					  </div>
+					   <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Bairro" for="bairro" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="bairro" label="Bairro" value="#{usuarioBean.bairro}" required="true" requiredMessage="O bairro é obrigatório" />
+						</div>
+					  </div>
+					  <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Cidade" for="cidade" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="cidade" label="Cidade" value="#{usuarioBean.cidade}" required="true" requiredMessage="A cidade é obrigatória" />
+						</div>
+					  </div>	
+				  <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Estado" for="estado" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="estado" label="Estado" value="#{usuarioBean.estado}" required="true" requiredMessage="O estado é obrigatório" />
+						</div>
+					  </div>					  				  					  
+					  <div class="control-group">
+						<p:outputLabel styleClass="control-label" value="Pais" for="pais" />
+						<div class="controls docs-input-sizes">
+   						  <p:inputText styleClass="span4" id="pais" label="Pais" value="#{usuarioBean.pais}" required="true" requiredMessage="O pais é obrigatório" />
+						</div>
+					  </div>
+					  </div>
+					  </div>				
+				<div class=" span12 no_margin_left">
+					<hr />					
+					 <div class="span3"><h:commandButton action="#{usuarioBean.salvar}" value="Finalizar Cadastro" class="btn btn-primary btn-large pull-right" /></div>
+					 
+          		</div>
+          </fieldset>
+	  </h:form>
+</div>		
+		<hr />
+		
+		   <script>
+    function consultacep(cep){
+      cep = cep.replace(/\D/g,"")
+      url="http://cep.correiocontrol.com.br/"+cep+".js"
+      s=document.createElement('script')
+      s.setAttribute('charset','utf-8')
+      s.src=url
+      document.querySelector('head').appendChild(s)
+    }
+
+    function correiocontrolcep(valor){
+     
+    	if (valor.erro) {
+        alert('Cep não encontrado');        
+        return;
+      }else{
+          document.getElementById('endereco').value=valor.logradouro;
+          document.getElementById('bairro').value=valor.bairro;
+          document.getElementById('cidade').value=valor.localidade;
+          document.getElementById('estado').value=valor.uf;
+          document.getElementById('pais').value='Brasil';
+      }
+      
+
+    }
+    </script>
+</body>
+</ui:define>
+</ui:composition>
+</html>

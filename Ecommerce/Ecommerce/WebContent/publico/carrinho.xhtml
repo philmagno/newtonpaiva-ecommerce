@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/interna.xhtml">
+	<ui:define name="corpo">
+		<body>
+			<div class="row">
+				<div class="span12">
+
+					<h:form id="form">
+						<h1>Resumo do Carrinho</h1>
+						<br />
+						<h:commandButton value="Continuar Comprando"
+							styleClass="btn btn-primary" style="margin-left: 650px;"
+							action="#{carrinhoBean.continuarComprando}" />
+						<h:commandButton value="Finalizar Compra"
+							styleClass="btn btn-primary" style="margin-left: 20px;"
+							action="#{carrinhoBean.finalizarPedido}" />
+						<br />
+						<br />
+						<p:messages />
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Remover</th>
+									<th>Image</th>
+									<th>Produto</th>
+									<th>Quantidade</th>
+									<th>Preço Unitario</th>
+									<th>Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<ui:repeat var="item"
+									value="#{carrinhoBean.pedidoCarrinho.itensPedido}">
+									<tr>
+										<td class=""><p:commandLink
+												action="#{carrinhoBean.removerProduto}"
+												onclick="if (!confirm('Tem certeza que deseja excluir #{item.nome} do carrinho?')) return false;">
+												<h:graphicImage library="css/images" name="excluir16.png"
+													title="Excluir Produto" />
+												<f:setPropertyActionListener
+													target="#{carrinhoBean.removerProduto}"
+													value="#{item}" />
+												<f:ajax render="@form" process="@form" />
+											</p:commandLink></td>
+										<td class="muted center_text"><h:graphicImage
+												library="css" name="images/macbook-pro.jpg" /></td>
+										<td>#{item.nome}</td>
+										<td><p:inputText value="#{item.quantidade}" update="valorTotal"
+												style="width: 30px;" immediate="true" >
+												<p:ajax update="valorTotal, :form:totalPedido" event="keyup" />
+											</p:inputText>
+												</td>
+										<td><h:outputText value="#{item.preco}">
+												<f:convertNumber type="currency" />
+											</h:outputText></td>
+										<td><h:outputText id="valorTotal" value="#{item.valorTotal}">
+												<f:convertNumber type="currency" />
+											</h:outputText></td>
+									</tr>
+								</ui:repeat>
+							</tbody>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td><strong> <h:outputText id="totalPedido"
+											value="#{carrinhoBean.pedidoCarrinho.valorTotal}">
+											<f:convertNumber type="currency" />
+										</h:outputText>
+								</strong></td>
+							</tr>
+						</table>
+					</h:form>
+					<script src="js/jquery.min.js"></script>
+					<script src="bootstrap/js/bootstrap.js"></script>
+					<script src="js/jquery.rating.pack.js"></script>
+				</div>
+			</div>
+		</body>
+	</ui:define>
+</ui:composition>
+</html>

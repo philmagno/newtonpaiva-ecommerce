@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#publico#index.xhtml"
+  PATH="/publico/index.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#publico#index.xhtml:0" NAME="item"
+   PATH="/publico/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="true:#{produtoBean.pesquisaFiltrada}:#publico#listaProduto.xhtml"
+    NAME="output" PATH="/publico/listaProduto.xhtml"
+    TARGET="rules:#publico#listaProduto.xhtml"
+    TITLE="#{produtoBean.pesquisaFiltrada}:true" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#publico#listaProduto.xhtml"
+  PATH="/publico/listaProduto.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
