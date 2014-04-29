@@ -15,6 +15,7 @@ import br.newton.ecommerce.entity.Usuario;
 public class CarrinhoBean implements Serializable {
 	private static final long serialVersionUID = 7260399016080400950L;
 
+	//teste git
 	private Pedido pedidoCarrinho;
 	private Usuario usuario;
 	private Produto produto;
