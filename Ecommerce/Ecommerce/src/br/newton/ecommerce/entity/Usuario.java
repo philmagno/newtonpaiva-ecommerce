@@ -36,9 +36,10 @@ public class Usuario implements Serializable {
 	private String endereco;
 	private String email;
 	private String senha;
+	private boolean ativo;
+	
 	@Transient
 	private String confirmacaoSenha;
-	private boolean ativo;
 	
 	@ElementCollection(targetClass = String.class)
 	@JoinTable(
@@ -206,5 +207,12 @@ public class Usuario implements Serializable {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
+
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
+	}
+
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
+	}		
 }

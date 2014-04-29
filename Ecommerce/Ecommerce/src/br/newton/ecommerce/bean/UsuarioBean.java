@@ -76,9 +76,9 @@ public class UsuarioBean {
 		this.usuario.getPermissao().add("ROLE_USUARIO");
 
 		if (senha != null && senha.trim().length() > 0
-				&& !senha.equals(this.confirma_senha)) {
+				&& !senha.equals(usuario.getConfirmacaoSenha())) {
 			FacesMessage facesMessage = new FacesMessage(
-					"A senha n�o foi confirmada corretamente");
+					"A senha não foi confirmada corretamente");
 			context.addMessage(null, facesMessage);
 
 			return null;
@@ -137,7 +137,7 @@ public class UsuarioBean {
 
 		if (!senhaCripto.equals(this.usuario.getSenha())) {
 			FacesMessage facesMessage = new FacesMessage(
-					"A senha antiga n�o confere");
+					"A senha antiga não confere");
 			context.addMessage(null, facesMessage);
 			return null;
 		}
@@ -145,7 +145,7 @@ public class UsuarioBean {
 		if (!senhaNova.equals(confirmarSenha)) {
 
 			FacesMessage facesMessage = new FacesMessage(
-					"A senha confirmada n�o confere");
+					"A senha confirmada não confere");
 			context.addMessage(null, facesMessage);
 			return null;
 
