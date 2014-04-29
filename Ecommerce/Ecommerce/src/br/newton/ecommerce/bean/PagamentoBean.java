@@ -6,8 +6,8 @@ import java.rmi.RemoteException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.tempuri.CResultado;
@@ -29,7 +29,7 @@ public class PagamentoBean implements Serializable {
 	private Endereco endereco;
 	private String frete;
 
-	@ManagedProperty("#{carrinhoBean}")
+	@Inject
 	private CarrinhoBean carrinhoBean;
 
 	@PostConstruct
