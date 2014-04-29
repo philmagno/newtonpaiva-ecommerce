@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -34,7 +35,9 @@ public class Usuario implements Serializable {
 	private String cep;
 	private String endereco;
 	private String email;
-	private String senha;	
+	private String senha;
+	@Transient
+	private String confirmacaoSenha;
 	private boolean ativo;
 	
 	@ElementCollection(targetClass = String.class)

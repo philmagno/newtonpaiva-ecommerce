@@ -8,7 +8,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	
 <head>
-
     <meta charset="utf-8" />
     <title>Ecommerce Newton</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,7 +23,7 @@
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 
   <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
   
 <ui:composition template="/templates/interna.xhtml">
@@ -93,43 +92,43 @@
 					  <div class="control-group">
 						<p:outputLabel styleClass="control-label" value="Endereço" for="endereco" />
 						<div class="controls docs-input-sizes">
-   						  <p:inputText styleClass="span4" id="endereco" label="Endereço" value="#{usuarioBean.usuario.endereco}" required="true" requiredMessage="O endereço é obrigatório" />
+   						  <p:inputText styleClass="span4" id="endereco" label="Endereço" value="#{usuarioBean.endereco.logradouro}" required="true" requiredMessage="O endereço é obrigatório" />
 						</div>
 					  </div>
 					   <div class="control-group">
 						<p:outputLabel styleClass="control-label" value="Número" for="numero" />
 						<div class="controls docs-input-sizes">
-   						  <p:inputText styleClass="span4" id="numero" label="Número" value="#{usuarioBean.numero}" required="true" requiredMessage="O número é obrigatório" />
+   						  <p:inputText styleClass="span4" id="numero" label="Número" value="#{usuarioBean.endereco.numero}" required="true" requiredMessage="O número é obrigatório" />
 						</div>
 					  </div>
 					   <div class="control-group">
 						<p:outputLabel styleClass="control-label" value="Complemento" for="complemento" />
 						<div class="controls docs-input-sizes">
-   						  <p:inputText styleClass="span4" id="complemento" label="Complemento" value="#{usuarioBean.complemento}" />
+   						  <p:inputText styleClass="span4" id="complemento" label="Complemento" value="#{usuarioBean.endereco.complemento}" />
 						</div>
 					  </div>
 					   <div class="control-group">
 						<p:outputLabel styleClass="control-label" value="Bairro" for="bairro" />
 						<div class="controls docs-input-sizes">
-   						  <p:inputText styleClass="span4" id="bairro" label="Bairro" value="#{usuarioBean.bairro}" required="true" requiredMessage="O bairro é obrigatório" />
+   						  <p:inputText styleClass="span4" id="bairro" label="Bairro" value="#{usuarioBean.endereco.bairro}" required="true" requiredMessage="O bairro é obrigatório" />
 						</div>
 					  </div>
 					  <div class="control-group">
 						<p:outputLabel styleClass="control-label" value="Cidade" for="cidade" />
 						<div class="controls docs-input-sizes">
-   						  <p:inputText styleClass="span4" id="cidade" label="Cidade" value="#{usuarioBean.cidade}" required="true" requiredMessage="A cidade é obrigatória" />
+   						  <p:inputText styleClass="span4" id="cidade" label="Cidade" value="#{usuarioBean.endereco.cidade}" required="true" requiredMessage="A cidade é obrigatória" />
 						</div>
 					  </div>	
 				  <div class="control-group">
 						<p:outputLabel styleClass="control-label" value="Estado" for="estado" />
 						<div class="controls docs-input-sizes">
-   						  <p:inputText styleClass="span4" id="estado" label="Estado" value="#{usuarioBean.estado}" required="true" requiredMessage="O estado é obrigatório" />
+   						  <p:inputText styleClass="span4" id="estado" label="Estado" value="#{usuarioBean.endereco.estado}" required="true" requiredMessage="O estado é obrigatório" />
 						</div>
 					  </div>					  				  					  
 					  <div class="control-group">
 						<p:outputLabel styleClass="control-label" value="Pais" for="pais" />
 						<div class="controls docs-input-sizes">
-   						  <p:inputText styleClass="span4" id="pais" label="Pais" value="#{usuarioBean.pais}" required="true" requiredMessage="O pais é obrigatório" />
+   						  <p:inputText styleClass="span4" id="pais" label="Pais" value="#{usuarioBean.endereco.pais}" required="true" requiredMessage="O pais é obrigatório" />
 						</div>
 					  </div>
 					  </div>
