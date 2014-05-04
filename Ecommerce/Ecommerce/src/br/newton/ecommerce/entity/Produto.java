@@ -7,41 +7,44 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="produto")
-public class Produto implements Serializable{
-	
+@Table(name ="produto")
+public class Produto implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
-	@Column(name="idproduto")
+	@Column(name = "idproduto")
 	private int id;
-	
-	@Column(name="nome")
+
+	@Column(name = "nome")
 	private String nome;
-	
-	@Column(name="idcategoria")
+
+	@Column(name = "idcategoria")
 	private transient int categoria;
-	
-	@Column(name="preco")
+
+	@Column(name = "preco")
 	private double preco;
-	
-	@Column(name="caminhoImagem")
+
+	@Column(name = "caminhoImagem")
 	private String imagem;
-	
-	private transient int quantidade;
+
+	@Transient
+	private int quantidade;
 
 	/**
 	 * Método responsável por informar o valor total do produto.
+	 * 
 	 * @return
 	 */
-	public double getValorTotal(){
+	public double getValorTotal() {
 		return preco * quantidade;
 	}
-	
+
 	/*
-	 * Defaults Getters and Setters 
+	 * Defaults Getters and Setters
 	 */
 	public String getNome() {
 		return nome;
@@ -107,6 +110,6 @@ public class Produto implements Serializable{
 		if (id != other.id)
 			return false;
 		return true;
-	}	
+	}
 
 }

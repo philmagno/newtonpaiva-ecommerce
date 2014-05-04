@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.newton.ecommerce.dao.PedidoDao;
+import br.newton.ecommerce.dao.PedidoDAO;
 import br.newton.ecommerce.entity.CartaoCredito;
 import br.newton.ecommerce.entity.Pedido;
 import br.newton.ecommerce.entity.Usuario;
@@ -24,10 +24,10 @@ import com.paypal.core.rest.PayPalRESTException;
 public class PayPalBusiness implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private PedidoDao pedidoDao;
+	private PedidoDAO pedidoDao;
 
 	public PayPalBusiness() {
-		pedidoDao = new PedidoDao();
+		pedidoDao = new PedidoDAO();
 	}
 
 	public void pagamento(CartaoCredito cartaoCredito)
@@ -107,8 +107,10 @@ public class PayPalBusiness implements Serializable {
 	public boolean iniciarPagamento(CartaoCredito cartaoCredito,
 			Usuario usuario, Pedido pedidoCarrinho) {
 		try {
-			pedidoDao.salvar(pedidoCarrinho, cartaoCredito);
 			pagamento(cartaoCredito);
+			pedidoCarrinho.setCartaoCredito(cartaoCredito);
+			pedidoDao.salvar(pedidoCarrinho);
+			
 			return true;
 		} catch (PayPalRESTException e) {
 			e.printStackTrace();

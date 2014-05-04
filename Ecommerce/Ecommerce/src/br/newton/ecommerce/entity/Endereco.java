@@ -85,5 +85,4 @@ public class Endereco implements Serializable{
 				+ estado + ", pais=" + pais + "]";
 	}
 	
-	
 }

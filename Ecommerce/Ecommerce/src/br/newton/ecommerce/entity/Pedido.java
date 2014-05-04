@@ -10,9 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pedido")
@@ -26,7 +26,7 @@ public class Pedido implements Serializable {
 
 	@Column(name = "data")
 	private Date data;
-	
+
 	private String status;
 	private double valorFrete;
 
@@ -34,42 +34,45 @@ public class Pedido implements Serializable {
 	@JoinColumn(name = "codigo")
 	private Usuario usuario;
 
-	@Transient
+	@ManyToMany
 	private List<Produto> itensPedido = new ArrayList<Produto>();
 
 	@JoinColumn(name = "fkendereco")
 	private Endereco endereco;
-
+	
+	@ManyToOne
+	private CartaoCredito cartaoCredito;
 
 	/**
 	 * Retorna o total do Pedido;
+	 * 
 	 * @return
 	 */
-	public double getValorTotal(){
+	public double getValorTotal() {
 		Double valorTotal = 0.0D;
-		
-		for(Produto produto : itensPedido)
+
+		for (Produto produto : itensPedido)
 			valorTotal = valorTotal + produto.getValorTotal();
-		
-		if(valorFrete > 0)
+
+		if (valorFrete > 0)
 			valorTotal = valorTotal + valorFrete;
-		
+
 		return valorTotal;
 	}
-	
+
 	public void addItensPedido(Produto produto) {
-		
-		if(this.itensPedido.contains(produto)){
-			for(Produto item : itensPedido){
-				if(item.equals(produto)){
-					item.setQuantidade(item.getQuantidade() +1);
+
+		if (this.itensPedido.contains(produto)) {
+			for (Produto item : itensPedido) {
+				if (item.equals(produto)) {
+					item.setQuantidade(item.getQuantidade() + 1);
 				}
 			}
-		}else{
+		} else {
 			this.itensPedido.add(produto);
 		}
 	}
-	
+
 	public int getPedido() {
 		return pedido;
 	}
@@ -121,6 +124,14 @@ public class Pedido implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+	
+	public CartaoCredito getCartaoCredito() {
+		return cartaoCredito;
+	}
+
+	public void setCartaoCredito(CartaoCredito cartaoCredito) {
+		this.cartaoCredito = cartaoCredito;
+	}
 
 	@Override
 	public int hashCode() {
@@ -168,5 +179,5 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

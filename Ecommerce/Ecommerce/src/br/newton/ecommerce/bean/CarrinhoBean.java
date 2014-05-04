@@ -26,9 +26,10 @@ public class CarrinhoBean implements Serializable {
 	}
 		
 	public String adicionarItem(Produto produto) {
-			produto.setQuantidade(1);
-			pedidoCarrinho.addItensPedido(produto);
-			return "carrinho";
+		produto.setQuantidade(1);
+		pedidoCarrinho.addItensPedido(produto);
+
+		return "carrinho";
 	}
 
 	public String removerItem() {
@@ -69,5 +70,4 @@ public class CarrinhoBean implements Serializable {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-
 }

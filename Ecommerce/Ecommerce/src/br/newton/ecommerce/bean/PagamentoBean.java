@@ -1,53 +1,55 @@
 package br.newton.ecommerce.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.rmi.RemoteException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
 
-import org.tempuri.CResultado;
-import org.tempuri.CServico;
-import org.tempuri.CalcPrecoPrazoWSSoap;
-import org.tempuri.CalcPrecoPrazoWSSoapProxy;
+import com.paypal.core.rest.PayPalRESTException;
 
 import br.newton.ecommerce.business.PayPalBusiness;
 import br.newton.ecommerce.entity.CartaoCredito;
 import br.newton.ecommerce.entity.Endereco;
 import br.newton.ecommerce.entity.Pedido;
+import br.newton.ecommerce.entity.Usuario;
+import br.newton.ecommerce.mocks.CorreiosServices;
+import br.newton.ecommerce.mocks.CorreiosServicesMock;
+import br.newton.ecommerce.mocks.PayPalServices;
+import br.newton.ecommerce.mocks.PayPalServicesMock;
 
-@Named("pagamentoBean")
+@ManagedBean(name="pagamentoBean")
+@ViewScoped
 public class PagamentoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private CartaoCredito cartaoCredito;
-	private PayPalBusiness payPalBusiness;
 	private Endereco endereco;
 	private String frete;
 
-	@Inject
+	@ManagedProperty("#{carrinhoBean}")
 	private CarrinhoBean carrinhoBean;
-
+	
 	@PostConstruct
-	public void init() {
-		payPalBusiness = new PayPalBusiness();
-		cartaoCredito = new CartaoCredito();
-		endereco = new Endereco();
+	public void init() {		
+		
+		if(cartaoCredito == null)
+			cartaoCredito = new CartaoCredito();
+		
+		if(endereco == null)
+			endereco = new Endereco();
 	}
 
-	public String realizarPagamento() {  
+	public String realizarPagamento() { 
+		PayPalServices payPalBusiness = new PayPalServicesMock();
 		Pedido pedido = carrinhoBean.getPedidoCarrinho();
-//		pedido.setEndereco(endereco);
 		boolean pagamento = payPalBusiness.iniciarPagamento(cartaoCredito, carrinhoBean.getUsuario(), carrinhoBean.getPedidoCarrinho());
 		
 		if(pagamento){
-			//cria novos objetos para serem utilizados nos beans
 			this.resetItens();
-			carrinhoBean.removerItem();
 			return "resumo" ;
 		}else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Numero do Cartão Inválido", "PrimeFaces makes no mistakes")); 
@@ -62,25 +64,9 @@ public class PagamentoBean implements Serializable {
 	}
 
 	public void calcularFrete() {
-		System.out.println("iniciando calculo do frete");
-		
-		 try {
-			 CalcPrecoPrazoWSSoap calcpreco = new CalcPrecoPrazoWSSoapProxy();
-			
-			 CResultado calcPrecoPrazo = calcpreco.calcPrecoPrazo("", "",
-					 "40010", "31365250", endereco.getCep(), "3", 1,
-			 new BigDecimal(40), new BigDecimal(40), new BigDecimal(40),
-			 new BigDecimal(42), "N", new BigDecimal(100), "S");
-			 System.out.println(calcPrecoPrazo);
-			
-			 System.out.println("Lista de serviços: "+ calcPrecoPrazo.getServicos());
-			
-			 CServico servico = calcPrecoPrazo.getServicos()[0];
-//			 carrinhoBean.getPedidoCarrinho().setValorfrete(Double.valueOf(servico.getValor().replace(',', '.')));
-
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		CorreiosServices correiosServices = new CorreiosServicesMock();
+		double valorFrente = correiosServices.calcularFrete(endereco.getCep());
+		carrinhoBean.getPedidoCarrinho().setValorFrete(valorFrente);
 	}
 
 	public CartaoCredito getCartaoCredito() {
@@ -114,5 +100,4 @@ public class PagamentoBean implements Serializable {
 	public void setFrete(String frete) {
 		this.frete = frete;
 	}
-
 }
