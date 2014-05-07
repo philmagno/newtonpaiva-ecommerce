@@ -1,6 +1,5 @@
 package br.newton.ecommerce.mocks;
 
-import javax.enterprise.inject.Default;
 
 /**
  * Implementação do mock para simulação dos webservices do correio.
@@ -8,7 +7,6 @@ import javax.enterprise.inject.Default;
  * @author philippe
  *
  */
-@Default
 public class CorreiosServicesMock implements CorreiosServices {
 
 	@Override

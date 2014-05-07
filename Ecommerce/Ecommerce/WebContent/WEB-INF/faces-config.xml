@@ -12,4 +12,13 @@
 			<from-outcome>true</from-outcome>
 		</navigation-case>
 	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/admin/cadastroProduto.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{produtoBean.pesquisaFiltrada}</from-action>
+			<to-view-id>/publico/listaProduto.xhtml</to-view-id>
+			<from-outcome>true</from-outcome>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

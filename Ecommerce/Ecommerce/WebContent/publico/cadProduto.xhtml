@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition template="/templates/interna.xhtml">
+		<ui:define name="corpo">
+			<h:form id="form">
+				<p:messages id="growl" />
+				<fieldset>
+					<div class="span6 no_margin_left">
+						<legend>Dados Produto</legend>
+					</div>
+				</fieldset>
+				<h:outputLabel styleClass="control-label" value="Código"
+					for="codigo" />
+				<h:inputText styleClass="span4" id="codigo" label="Codigo"
+					value="#{produtoBean.produtoSelecionado.id}" disabled="true" />
+
+				<h:outputLabel styleClass="control-label" value="Nome" for="nome" />
+				<h:inputText styleClass="span4" id="nome" label="Nome"
+					value="#{produtoBean.produtoSelecionado.nome}" required="true"
+					requiredMessage="O nome do usuário é obrigatório" />
+
+				<h:outputLabel styleClass="control-label" value="Preco" for="preco" />
+				<h:inputText styleClass="span4" id="preco" label="preco"
+					value="#{produtoBean.produtoSelecionado.preco}" required="true"
+					requiredMessage="O nome do preco é obrigatório" />
+
+				<br />
+				<p:commandButton value="Salvar" styleClass="btn btn-primary" action="#{produtoBean.salvarProduto}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

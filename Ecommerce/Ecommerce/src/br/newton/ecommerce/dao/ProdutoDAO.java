@@ -10,7 +10,7 @@ import br.newton.ecommerce.entity.Produto;
 import br.newton.ecommerce.util.JPAUtil;
 
 public class ProdutoDAO implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private EntityManager entityManager;
 
@@ -66,4 +66,31 @@ public class ProdutoDAO implements Serializable {
 		return produtos;
 	}
 
+	public Produto save(Produto produto) {
+		if (!this.entityManager.isOpen())
+			this.entityManager.getTransaction().begin();
+
+		try {
+			if (produto.getId() <= 0) {
+				this.entityManager.persist(produto);
+			} else {
+				produto = this.entityManager.merge(produto);
+			}
+		} catch (Exception e) {
+			return null;
+		}
+
+		return produto;
+	}
+
+	public void remove(Produto produto) {
+		if (!this.entityManager.isOpen())
+			this.entityManager.getTransaction().begin();
+
+		try {
+			this.entityManager.remove(produto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

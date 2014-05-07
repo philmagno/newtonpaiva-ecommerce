@@ -1,7 +1,5 @@
 package br.newton.ecommerce.mocks;
 
-import javax.enterprise.inject.Default;
-
 import br.newton.ecommerce.entity.CartaoCredito;
 import br.newton.ecommerce.entity.Pedido;
 import br.newton.ecommerce.entity.Usuario;
@@ -13,7 +11,6 @@ import com.paypal.core.rest.PayPalRESTException;
  * @author philippe
  *
  */
-@Default
 public class PayPalServicesMock implements PayPalServices {
 
 	@Override

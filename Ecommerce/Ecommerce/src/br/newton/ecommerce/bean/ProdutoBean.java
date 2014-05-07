@@ -4,15 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.RequestScoped;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import br.newton.ecommerce.business.ProdutoBusiness;
 import br.newton.ecommerce.entity.Produto;
-import br.newton.ecommerce.mocks.PayPalServicesProducao;
 
 /**
  * ManagedBean responsável pela tela com a lista de produtos do site.
@@ -20,8 +19,8 @@ import br.newton.ecommerce.mocks.PayPalServicesProducao;
  * @author philippe
  * 
  */
-@Named("produtoBean")
-@RequestScoped
+@ManagedBean(name="produtoBean")
+@SessionScoped
 public class ProdutoBean implements Serializable {
 
 	/**
@@ -36,15 +35,17 @@ public class ProdutoBean implements Serializable {
 	int index = 0;
 	int limit = 12;
 	private String filtroProduto;
-	
-	@Inject
-	private PayPalServicesProducao payPalProducao; 
+	private Produto produtoSelecionado;
 
-	public ProdutoBean() {
+	@PostConstruct
+	public void init() {
 		produtoBusiness = new ProdutoBusiness();
 		if (listaProdutos == null) {
 			listaProdutos = produtoBusiness.findPaginated(index, 10);
 		}
+		
+		if(produtoSelecionado == null)
+				produtoSelecionado = new Produto();
 	}
 
 	public void buscarPaginada() {
@@ -74,7 +75,38 @@ public class ProdutoBean implements Serializable {
 
 		return "true";
 	}
-
+	
+	public String novoProduto(){
+		this.produtoSelecionado = new Produto();
+		
+		return "cadProduto";
+	}
+	
+	public String alterarProduto(Produto produto){
+		this.produtoSelecionado = produto;
+		
+		return "cadProduto";
+	}
+	
+	public String salvarProduto(){
+		Produto produtoTMP;
+		if(produtoSelecionado.getId() <= 0){
+			produtoTMP = produtoBusiness.save(produtoSelecionado);
+			listaProdutos.add(produtoTMP);
+		}else{
+			produtoTMP = produtoBusiness.save(produtoSelecionado);
+		}
+				
+		return "crudProduto";
+	}
+	
+	public String excluirProduto(Produto produto){
+		listaProdutos.remove(produto);
+		produtoBusiness.remove(produto);
+		
+		return "crudProduto";
+	}
+	
 	/*
 	 * Getters e setters estão sendo colocados na parte de baixo. Apenas por uma
 	 * questão de organização.
@@ -128,4 +160,12 @@ public class ProdutoBean implements Serializable {
 		this.filtroProduto = filtroProduto;
 	}
 
+	public Produto getProdutoSelecionado() {
+		return produtoSelecionado;
+	}
+
+	public void setProdutoSelecionado(Produto produtoSelecionado) {
+		this.produtoSelecionado = produtoSelecionado;
+	}
+	
 }

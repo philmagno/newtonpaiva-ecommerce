@@ -5,17 +5,17 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 
-import org.springframework.util.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import br.newton.ecommerce.business.UsuarioBusiness;
 import br.newton.ecommerce.entity.Endereco;
 import br.newton.ecommerce.entity.Usuario;
 
-@Named("usuarioBean")
+@ManagedBean(name="usuarioBean")
 @RequestScoped
 public class UsuarioBean {
 
@@ -87,7 +87,8 @@ public class UsuarioBean {
 		if (senha != null && senha.trim().length() == 0) {
 			this.usuario.setSenha(this.senhaCriptografada);
 		} else {
-			String senhaCripto = DigestUtils.md5DigestAsHex(senha.getBytes());
+//			String senhaCripto = DigestUtils.md5DigestAsHex(senha.getBytes());
+			String senhaCripto = senha;
 			this.usuario.setSenha(senhaCripto);
 		}
 		UsuarioBusiness usuarioRN = new UsuarioBusiness();
@@ -131,7 +132,8 @@ public class UsuarioBean {
 
 	public String trocarSenha() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		String senhaCripto = DigestUtils.md5DigestAsHex(senhaAntiga.getBytes());
+//		String senhaCripto = DigestUtils.md5DigestAsHex(senhaAntiga.getBytes());
+		String senhaCripto = senhaAntiga;
 
 		this.usuario = getUsuarioLogado();
 
@@ -151,8 +153,9 @@ public class UsuarioBean {
 
 		}
 
-		String senhaCriptoNova = DigestUtils.md5DigestAsHex(senhaNova
-				.getBytes());
+//		String senhaCriptoNova = DigestUtils.md5DigestAsHex(senhaNova
+//				.getBytes());
+		String senhaCriptoNova = senhaNova;
 		this.usuario.setSenha(senhaCriptoNova);
 
 		UsuarioBusiness usuarioRN = new UsuarioBusiness();

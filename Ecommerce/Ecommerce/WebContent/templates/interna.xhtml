@@ -21,7 +21,7 @@
 		rel="stylesheet" />
 	<link href="../resources/css/main.css" rel="stylesheet" />
 	<link href="../resources/css/jquery.rating.css" rel="stylesheet" />
-
+	<link href="../resources/css/datatable.css" rel="stylesheet" />
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 
 	<meta charset="utf-8" />
@@ -48,6 +48,7 @@
 						<!-- 						<a href="two-column.html">Sobre</a> | -->
 						<!-- 						<a href="contact.html">Contato</a> | -->
 						<!-- 						<a href="#" onclick="document.location='#{request.contextPath}/j_spring_security_logout'">Sair</a> -->
+						<a href="crudProduto.jsf">Gerência de Produtos</a>
 					</div>
 
 				</div>
@@ -68,8 +69,7 @@
 							<div class="nav-collapse">
 								<ul class="nav">
 									<li>
-										<!-- 							  <a href="category.html">Computadores</a>		 --> <h:link
-											value="Computador" outcome="listaProduto">
+										<h:link value="Computador" outcome="listaProduto">
 											<f:param name="categoria" value="1" />
 										</h:link>
 									</li>

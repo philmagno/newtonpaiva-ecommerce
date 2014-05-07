@@ -3,14 +3,14 @@ package br.newton.ecommerce.bean;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import br.newton.ecommerce.entity.Pedido;
 import br.newton.ecommerce.entity.Produto;
 import br.newton.ecommerce.entity.Usuario;
 
-@Named("carrinhoBean")
+@ManagedBean
 @SessionScoped
 public class CarrinhoBean implements Serializable {
 	private static final long serialVersionUID = 7260399016080400950L;

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+	<ui:composition template="/templates/interna.xhtml">
+		<ui:define name="corpo">
+			<h:form id="form">
+				<p:messages id="growl" />
+				<h:dataTable value="#{produtoBean.listaProdutos}" var="product"
+					styleClass="order-table" headerClass="order-table-header"
+					rowClasses="order-table-odd-row,order-table-even-row">
+
+					<h:column>
+						<f:facet name="header">Código</f:facet>
+						#{product.id}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						#{product.nome}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Preco</f:facet>
+						#{product.preco}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Ações</f:facet>
+						<p:commandButton value="Editar" styleClass="btn btn-primary" 
+						style="width: 65px !important; height: 35px !important;" action="#{produtoBean.alterarProduto(product)}" >
+							<f:param name="startIndex" value="#{product.id}" />
+						</p:commandButton>
+						<p:commandButton value="Excluir" style="width: 74px !important; height: 35px !important;" 
+						update=":form"
+						 styleClass="btn" action="#{produtoBean.excluirProduto(product)}" />
+					</h:column>
+				</h:dataTable>
+				<p:commandButton value="Novo" styleClass="btn btn-primary" action="#{produtoBean.novoProduto}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

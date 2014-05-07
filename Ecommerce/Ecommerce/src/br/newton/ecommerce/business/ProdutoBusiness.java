@@ -1,5 +1,6 @@
 package br.newton.ecommerce.business;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.newton.ecommerce.dao.ProdutoDAO;
@@ -12,18 +13,21 @@ import br.newton.ecommerce.entity.Produto;
  * @author philippe
  * 
  */
-public class ProdutoBusiness {
+public class ProdutoBusiness implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ProdutoDAO dao;
 
 	public ProdutoBusiness() {
 		dao = new ProdutoDAO();
 	}
 
-	// @Override
-	// public void save(Produto produto) {
-	// dao.save(produto);
-	// }
+	public Produto save(Produto produto) {
+		return dao.save(produto);
+	}
 
 	public List<Produto> findAll() {
 		return dao.findAll();
@@ -39,6 +43,10 @@ public class ProdutoBusiness {
 
 	public List<Produto> filtroCategoria(String categoria) {
 		return dao.filtroCategoria(categoria);
+	}
+
+	public void remove(Produto produto) {
+		dao.remove(produto);
 	}
 
 }

@@ -9,13 +9,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import com.paypal.core.rest.PayPalRESTException;
-
-import br.newton.ecommerce.business.PayPalBusiness;
 import br.newton.ecommerce.entity.CartaoCredito;
 import br.newton.ecommerce.entity.Endereco;
 import br.newton.ecommerce.entity.Pedido;
-import br.newton.ecommerce.entity.Usuario;
 import br.newton.ecommerce.mocks.CorreiosServices;
 import br.newton.ecommerce.mocks.CorreiosServicesMock;
 import br.newton.ecommerce.mocks.PayPalServices;
