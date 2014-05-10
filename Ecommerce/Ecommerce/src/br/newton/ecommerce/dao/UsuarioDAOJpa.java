@@ -2,31 +2,40 @@ package br.newton.ecommerce.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import br.newton.ecommerce.entity.Usuario;
+import br.newton.ecommerce.util.JPAUtil;
 
 public class UsuarioDAOJpa implements UsuarioDAO {
 
+	private EntityManager entityManager;
+
+	public UsuarioDAOJpa() {
+		this.entityManager = JPAUtil.getEntityManager();
+	}
+	
 	@Override
 	public void salvar(Usuario usuario) {
-		// TODO Auto-generated method stub
-
+		if (!this.entityManager.isOpen())
+			this.entityManager.getTransaction().begin();
+		
+		this.entityManager.persist(usuario);
+		this.entityManager.flush();
 	}
 
 	@Override
 	public void atualizar(Usuario usuario) {
-		// TODO Auto-generated method stub
-
+		this.entityManager.merge(usuario);
 	}
 
 	@Override
 	public void excluir(Usuario usuario) {
-		// TODO Auto-generated method stub
-
+		this.entityManager.remove(usuario);
 	}
 
 	@Override
 	public Usuario carregar(Integer codigo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

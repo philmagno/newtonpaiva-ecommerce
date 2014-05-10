@@ -16,19 +16,4 @@
 			<property name="hibernate.show_sql" value="false" />
 		</properties>
 	</persistence-unit>
-
-	<persistence-unit name="OpensEcommerce" transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<shared-cache-mode>ALL</shared-cache-mode>
-		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql:///newton-philmagno.rhcloud.com:3306/newton" />
-			<property name="javax.persistence.jdbc.user" value="admin8pgxrhV" />
-			<property name="javax.persistence.jdbc.password" value="K7AmNtEjf9Lh" />
-
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql" value="false" />
-		</properties>
-	</persistence-unit>
 </persistence>

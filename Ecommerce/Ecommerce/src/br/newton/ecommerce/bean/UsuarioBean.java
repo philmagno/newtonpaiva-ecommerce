@@ -1,15 +1,11 @@
 package br.newton.ecommerce.bean;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
-import org.apache.commons.codec.digest.DigestUtils;
 
 import br.newton.ecommerce.business.UsuarioBusiness;
 import br.newton.ecommerce.entity.Endereco;
@@ -21,7 +17,6 @@ public class UsuarioBean {
 
 	private Usuario usuario = new Usuario();
 	private String confirmarSenha;
-	private List<Usuario> lista;
 	private String destinoSalvar;
 	private String senhaCriptografada;
 	private String permissaoSel;
@@ -35,19 +30,6 @@ public class UsuarioBean {
 	@PostConstruct
 	public void init() {
 		endereco = new Endereco();
-	}
-
-	public String atribuiPermissao(Usuario usuario, String permissao) {
-		this.usuario = usuario;
-		java.util.Set<String> permissoes = this.usuario.getPermissao();
-
-		if (permissoes.contains(permissao)) {
-			permissoes.remove(permissao);
-		} else {
-			permissoes.add(permissao);
-		}
-
-		return null;
 	}
 
 	public String novo() {
@@ -67,14 +49,10 @@ public class UsuarioBean {
 	}
 
 	public String salvar() {
-		System.out.println(endereco);
-		this.usuario.getPermissao().add("ROLE_USUARIO");
-
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		String senha = this.usuario.getSenha();
-		this.usuario.getPermissao().add("ROLE_USUARIO");
-
+		this.usuario.setTipo(0);
 		if (senha != null && senha.trim().length() > 0
 				&& !senha.equals(usuario.getConfirmacaoSenha())) {
 			FacesMessage facesMessage = new FacesMessage(
@@ -83,52 +61,13 @@ public class UsuarioBean {
 
 			return null;
 		}
-
-		if (senha != null && senha.trim().length() == 0) {
-			this.usuario.setSenha(this.senhaCriptografada);
-		} else {
-//			String senhaCripto = DigestUtils.md5DigestAsHex(senha.getBytes());
-			String senhaCripto = senha;
-			this.usuario.setSenha(senhaCripto);
-		}
+		
 		UsuarioBusiness usuarioRN = new UsuarioBusiness();
 		usuarioRN.salvar(this.usuario);
 
 		return "index";
 	}
 
-	public void setLista(List<Usuario> lista) {
-		this.lista = lista;
-	}
-
-	public String excluir() {
-		UsuarioBusiness usuarioRN = new UsuarioBusiness();
-		usuarioRN.excluir(this.usuario);
-		this.lista = null;
-
-		return null;
-	}
-
-	public String ativar() {
-		if (this.usuario.isAtivo())
-			this.usuario.setAtivo(false);
-		else
-			this.usuario.setAtivo(true);
-
-		UsuarioBusiness usuarioRN = new UsuarioBusiness();
-		usuarioRN.salvar(this.usuario);
-
-		return null;
-	}
-
-	public List<Usuario> getLista() {
-		if (this.lista == null) {
-			UsuarioBusiness usuarioRN = new UsuarioBusiness();
-			this.lista = usuarioRN.listar();
-		}
-
-		return this.lista;
-	}
 
 	public String trocarSenha() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -166,13 +105,6 @@ public class UsuarioBean {
 		context.addMessage(null, facesMessage);
 		return null;
 
-	}
-
-	public String getNomeUsuario() {
-		this.usuario = getUsuarioLogado();
-		this.nome_comprador = this.usuario.getNome();
-
-		return this.nome_comprador;
 	}
 
 	public Usuario getUsuarioLogado() {

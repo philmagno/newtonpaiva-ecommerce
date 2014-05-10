@@ -2,14 +2,13 @@ package br.newton.ecommerce.business;
 
 import java.util.List;
 
-import br.newton.ecommerce.dao.UsuarioDAO;
 import br.newton.ecommerce.dao.UsuarioDAOJpa;
 import br.newton.ecommerce.entity.Usuario;
 
 
 public class UsuarioBusiness {
 	
-	private UsuarioDAO usuarioDAO;
+	private UsuarioDAOJpa usuarioDAO;
 	
 	public UsuarioBusiness(){
 		this.usuarioDAO = new UsuarioDAOJpa();
