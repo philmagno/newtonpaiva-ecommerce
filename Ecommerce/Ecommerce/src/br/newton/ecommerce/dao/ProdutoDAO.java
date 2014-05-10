@@ -20,7 +20,7 @@ public class ProdutoDAO implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public List<Produto> findPaginated(int index, int max) {
-
+		
 		Query query = this.entityManager
 				.createNativeQuery(
 						"select * from produto order by idproduto limit :index , :max",

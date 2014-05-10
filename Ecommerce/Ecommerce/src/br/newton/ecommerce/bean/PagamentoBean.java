@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.newton.ecommerce.entity.CartaoCredito;
@@ -18,7 +18,7 @@ import br.newton.ecommerce.mocks.PayPalServices;
 import br.newton.ecommerce.mocks.PayPalServicesMock;
 
 @ManagedBean(name="pagamentoBean")
-@ViewScoped
+@SessionScoped
 public class PagamentoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

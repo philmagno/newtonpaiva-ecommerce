@@ -27,11 +27,8 @@
 									<h5>#{produto.nome}</h5>
 									Preço: #{produto.preco}
 									<br/> <br/>
-									<p:commandButton value="Comprar" styleClass="btn btn-primary pull-right"
-										action="#{carrinhoBean.adicionarItem}" update=":form:growl">
-										<f:setPropertyActionListener target="#{carrinhoBean.produto}"
-											value="#{produto}" />
-									</p:commandButton>
+									<p:commandButton value="Comprar" styleClass="btn btn-primary"
+											action="#{carrinhoBean.adicionarItem(produto)}" />
 								</div>
 							</div>
 						</li>
