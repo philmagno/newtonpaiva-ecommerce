@@ -17,11 +17,11 @@
 	<parameter name="dataFinal" class="java.util.Date"/>
 	<parameter name="caminho" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select p.nome_produto as Produto, p.preco as Valor_Unitario, SUM(i.quantidade) as Total_Vendas
-from Produto P inner join itens_pedido i on (p.idproduto = i.idproduto)
+		<![CDATA[select p.nome_produto as Produto, p.preco as Valor_Unitario, sum(i.quantidade) as Total_Vendas
+from produto p inner join itens_pedido i on (p.idproduto = i.idproduto)
 inner join pedido pe on (pe.idpedido = i.idpedido)
 where pe.data between $P{dataInicial} and $P{dataFinal}
-group BY p.nome_produto ORDER BY sum(i.quantidade) DESC;]]>
+group by p.nome_produto order by sum(i.quantidade) desc;]]>
 	</queryString>
 	<field name="Produto" class="java.lang.String"/>
 	<field name="Valor_Unitario" class="java.math.BigDecimal"/>
